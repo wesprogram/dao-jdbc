@@ -11,7 +11,6 @@ import db.DB;
 import db.DbException;
 import model.dao.DepartmentDao;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
 
@@ -57,11 +56,10 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("UPDATE Department " + " SET id = ?, name = ? " + "WHERE id = ?");
+			st = conn.prepareStatement("UPDATE Department SET Name = ? WHERE Id = ?");
 
-			st.setInt(1, obj.getId());
 			st.setString(1, obj.getName());
-			st.setInt(3, obj.getId());
+			st.setInt(2, obj.getId());
 
 			st.executeUpdate();
 		} catch (SQLException e) {
@@ -103,14 +101,6 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
 		}
-	}
-
-	private Department instantiateDepartment(ResultSet rs) throws SQLException {
-		Department dep = new Department();
-		dep.setId(rs.getInt("DepartmentId"));
-		dep.setName(rs.getString("DepName"));
-		return dep;
-
 	}
 
 	@Override
