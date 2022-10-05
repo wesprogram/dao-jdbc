@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,12 +61,26 @@ public class Program {
 		System.out.println("\n=== TEST 8: department findById ===");
 		Department department2 = departmentDao.findById(2);
 		System.out.println(department2);
-		
+
 		System.out.println("\n=== TEST 9: department update ===");
 		department2 = departmentDao.findById(1);
 		department2.setName("Food");
 		departmentDao.update(department2);
 		System.out.println("Update completed");
+
+		System.out.println("\n=== TEST 10: department delete ===");
+		id = 5;
+		departmentDao.deleteBtId(id);
+		System.out.println("Delete completed!");
+
+		System.out.println("\n=== TEST 10: department findAll ===");
+		List<Department> list2 = new ArrayList<>();
+		list2 = departmentDao.findAll();
+
+		for (Department obj : list2) {
+			System.out.println(obj);
+		}
+
 	}
 
 }
